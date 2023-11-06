@@ -1,2 +1,2 @@
-# C-_Project
+# Cpp_Project
 C++ university project
