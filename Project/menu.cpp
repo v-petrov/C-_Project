@@ -12,6 +12,8 @@ void Menu::saveIds() {
     if (file.is_open()) {
         file << Plane::getIdCnt() << "," << Flight::getIdCnt() << endl;
         file.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
     }
 }
 
@@ -28,6 +30,8 @@ int* Menu::loadIds() {
             idPointer[0] = stoi(planeIds);
             idPointer[1] = stoi(flightIds);
         }
+    } else {
+        throw ios_base::failure("File couldn't be open");
     }
     return idPointer;
 }
@@ -143,6 +147,8 @@ bool Menu::isUsernameAvailable(const string& username, const string& password, b
             }
         }
         file.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
     }
     return !isLogin;
 }
@@ -151,6 +157,8 @@ void Menu::saveUser(const string &username, const string &password) {
     if (file.is_open()) {
         file << username << "," << password << endl;
         file.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
     }
 }
 void Menu::adminMenu() {
@@ -305,6 +313,9 @@ void Menu::addPlaneToFile(const Plane& plane) {
         inputFile >> existingData;
         inputFile.close();
     }
+    else {
+        throw ios_base::failure("File couldn't be open");
+    }
 
     existingData.push_back(jsonPlane);
 
@@ -313,6 +324,8 @@ void Menu::addPlaneToFile(const Plane& plane) {
     if (outputFile.is_open()) {
         outputFile << existingData.dump(4) << endl;
         outputFile.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
     }
 }
 bool Menu::createFlight() {
@@ -410,6 +423,8 @@ bool Menu::validPlaneId(int id) {
     if (file.is_open()) {
         file >> planeData;
         file.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
     }
 
     bool res = false;
@@ -430,6 +445,8 @@ void Menu::addFlightToFile(const Flight& flight) {
     if (inputFile.is_open()) {
         inputFile >> existingData;
         inputFile.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
     }
 
     existingData.push_back(jsonFlight);
@@ -439,6 +456,8 @@ void Menu::addFlightToFile(const Flight& flight) {
     if (outputFile.is_open()) {
         outputFile << existingData.dump(4) << endl;
         outputFile.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
     }
 }
 void Menu::userMenu() {
@@ -488,6 +507,8 @@ void Menu::searchByDestination(const string& sDestination, const string& eDestin
     if (file.is_open()) {
         file >> flightData;
         file.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
     }
     vector<Flight*> flights;
 
@@ -515,4 +536,4 @@ int main() {
     delete[] ids;
 
     return 0;
-}
+}зз
