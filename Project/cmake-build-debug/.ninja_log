@@ -1,0 +1,6 @@
+# ninja log v5
+3	6971	7209789016816649	CMakeFiles/Project.dir/menu.cpp.obj	4f14bac07b710811
+7	2420	7208653195855264	CMakeFiles/Project.dir/flight.cpp.obj	a067dc5d4ed37317
+6971	12234	7209789069528692	Project.exe	9c4653a9fb1752a1
+1	133	7210696712377955	build.ninja	37787f475e6f07be
+3	4381	7208653215390871	CMakeFiles/Project.dir/plane.cpp.obj	46d8c8354a9307a9
