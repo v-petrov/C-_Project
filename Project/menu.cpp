@@ -536,4 +536,4 @@ int main() {
     delete[] ids;
 
     return 0;
-}зз
+}
