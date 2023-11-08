@@ -2,8 +2,7 @@
 using namespace std;
 
 class Menu {
-public:
-    static void welcome();
+private:
     static void login();
     static void registration();
     static bool isUsernameAvailable(const string&, const string&, bool);
@@ -20,6 +19,8 @@ public:
     static void searchByDestination(const string&,const string&);
     static void searchByAirline(const string&);
     static void printFlights(const vector<Flight*>& flights);
+public:
+    static void welcome();
     static int* loadIds();
     static void saveIds();
 };
