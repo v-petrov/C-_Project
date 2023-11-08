@@ -7,7 +7,7 @@
 using namespace std;
 
 enum Class {
-    First, Second, Third
+    A, B, C
 };
 
 class ClassFactory {

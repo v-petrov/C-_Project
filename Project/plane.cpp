@@ -4,11 +4,11 @@ using namespace std;
 Class ClassFactory::class_determination(const string &manufacturer, const string &model,
                                         double minRunwayLen) {
     if (minRunwayLen >= 3000) {
-        return Class::First;
+        return Class::A;
     } else if (minRunwayLen >= 2000) {
-        return Class::Second;
+        return Class::B;
     } else {
-        return Class::Third;
+        return Class::C;
     }
 }
 
@@ -54,13 +54,13 @@ nlohmann::json PlaneClass::toJson() const {
 ostream& operator<<(ostream& out, const PlaneClass& planeClass1) {
     switch (planeClass1.getPlaneClass()) {
         case 0:
-            out << "first";
+            out << "A";
             break;
         case 1:
-            out << "second";
+            out << "B";
             break;
         case 2:
-            out << "third";
+            out << "C";
             break;
     }
     return out;
