@@ -1,11 +1,10 @@
 #include "plane.h"
 using namespace std;
 
-Class ClassFactory::class_determination(const string &manufacturer, const string &model,
-                                        double minRunwayLen) {
-    if (minRunwayLen >= 3000) {
+Class ClassFactory::class_determination(const string &manufacturer) {
+    if (manufacturer == "Boeing" || manufacturer == "Airbus" || manufacturer == "Embraer"|| manufacturer == "Airbus Canada") {
         return Class::A;
-    } else if (minRunwayLen >= 2000) {
+    } else if (manufacturer == "Comac" || manufacturer == "Sukhoi Civil" || manufacturer == "Mitsubishi"|| manufacturer == "ATR") {
         return Class::B;
     } else {
         return Class::C;

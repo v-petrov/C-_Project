@@ -12,7 +12,7 @@ enum Class {
 
 class ClassFactory {
 public:
-    static Class class_determination(const string& manufacturer, const string& model, double minRunwayLen);
+    static Class class_determination(const string& manufacturer);
 };
 
 enum PlaneType {
@@ -29,9 +29,9 @@ private:
     Class planeClass{};
 
 public:
-    PlaneClass(const string& manufacturer, const string& model, double minRunwayDistance)
-        : manufacturer(manufacturer), model(model), minRunwayDistance(minRunwayDistance) {
-        this->planeClass = ClassFactory::class_determination(manufacturer, model, minRunwayDistance);
+    PlaneClass(const string& manufacturer, string  model, double minRunwayDistance)
+        : manufacturer(manufacturer), model(std::move(model)), minRunwayDistance(minRunwayDistance) {
+        this->planeClass = ClassFactory::class_determination(manufacturer);
     }
     PlaneClass() = default;
     ~PlaneClass() = default;
