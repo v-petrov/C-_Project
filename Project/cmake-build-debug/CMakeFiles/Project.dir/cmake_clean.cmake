@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Project.dir/menu.cpp.obj.d"
   "CMakeFiles/Project.dir/plane.cpp.obj"
   "CMakeFiles/Project.dir/plane.cpp.obj.d"
+  "CMakeFiles/Project.dir/runway.cpp.obj"
+  "CMakeFiles/Project.dir/runway.cpp.obj.d"
   "Project.exe"
   "Project.exe.manifest"
   "Project.pdb"

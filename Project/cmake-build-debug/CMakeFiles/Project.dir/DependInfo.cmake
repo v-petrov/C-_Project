@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/vasil/OneDrive/Desktop/Cpp/Project/flight.cpp" "CMakeFiles/Project.dir/flight.cpp.obj" "gcc" "CMakeFiles/Project.dir/flight.cpp.obj.d"
   "C:/Users/vasil/OneDrive/Desktop/Cpp/Project/menu.cpp" "CMakeFiles/Project.dir/menu.cpp.obj" "gcc" "CMakeFiles/Project.dir/menu.cpp.obj.d"
   "C:/Users/vasil/OneDrive/Desktop/Cpp/Project/plane.cpp" "CMakeFiles/Project.dir/plane.cpp.obj" "gcc" "CMakeFiles/Project.dir/plane.cpp.obj.d"
+  "C:/Users/vasil/OneDrive/Desktop/Cpp/Project/runway.cpp" "CMakeFiles/Project.dir/runway.cpp.obj" "gcc" "CMakeFiles/Project.dir/runway.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

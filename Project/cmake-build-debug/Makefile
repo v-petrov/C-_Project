@@ -200,6 +200,30 @@ plane.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/plane.cpp.s
 .PHONY : plane.cpp.s
 
+runway.obj: runway.cpp.obj
+.PHONY : runway.obj
+
+# target to build an object file
+runway.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/runway.cpp.obj
+.PHONY : runway.cpp.obj
+
+runway.i: runway.cpp.i
+.PHONY : runway.i
+
+# target to preprocess a source file
+runway.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/runway.cpp.i
+.PHONY : runway.cpp.i
+
+runway.s: runway.cpp.s
+.PHONY : runway.s
+
+# target to generate assembly for a file
+runway.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/runway.cpp.s
+.PHONY : runway.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -218,6 +242,9 @@ help:
 	@echo ... plane.obj
 	@echo ... plane.i
 	@echo ... plane.s
+	@echo ... runway.obj
+	@echo ... runway.i
+	@echo ... runway.s
 .PHONY : help
 
 
