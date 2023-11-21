@@ -14,6 +14,8 @@ private:
     static bool deletePlane(const string&, const string&, const string&);
     static void addPlaneToFile(const Plane&);
     static bool createFlight();
+    static bool createRunway();
+    static void addRunwayToFile(const Runway&);
     static bool validPlaneId(int id);
     static bool validNumericData(const string&, string&);
     static bool credentialsInformation(string& username, string& password, bool isLogin);

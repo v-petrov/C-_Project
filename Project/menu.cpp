@@ -10,7 +10,7 @@ int cnt;
 void Menu::saveIds() {
     ofstream file("ids.txt");
     if (file.is_open()) {
-        file << Plane::getIdCnt() << "," << Flight::getIdCnt() << endl;
+        file << Plane::getIdCnt() << "," << Flight::getIdCnt() << "," << Runway::getIdCnt() << endl;
         file.close();
     } else {
         throw ios_base::failure("File couldn't be open");
@@ -18,7 +18,7 @@ void Menu::saveIds() {
 }
 
 int* Menu::loadIds() {
-    int* idPointer = new int[2];
+    int* idPointer = new int[3];
     ifstream file("ids.txt");
     if (file.is_open()) {
         string line;
@@ -27,8 +27,10 @@ int* Menu::loadIds() {
         if (pos != string::npos) {
             string planeIds = line.substr(0, pos);
             string flightIds = line.substr(pos + 1);
+            string runwayIds = line.substr(pos + 3);
             idPointer[0] = stoi(planeIds);
             idPointer[1] = stoi(flightIds);
+            idPointer[2] = stoi(runwayIds);
         }
     } else {
         throw ios_base::failure("File couldn't be open");
@@ -166,6 +168,7 @@ void Menu::adminMenu() {
     cout << "What do you want to do?\n" << endl;
     cout << "Do you want to add a plan to the database[P]: " << endl;
     cout << "Do you want to add a flight to the database[F]: " << endl;
+    cout << "Do you want to add a runway to the database[R]: " << endl;
     cout << "Do you want to delete a flight or a plane from the database[D]: " << endl;
     cout << "If you want to exit the admin menu press anything else[...]" << endl;
     char c;
@@ -180,7 +183,7 @@ void Menu::adminMenu() {
             if (!res) {
                 return;
             }
-            cout << "The plane has been added. Do you want to add another plane or flight[P/F]: " << endl;
+            cout << "The plane has been added. Do you want to add another plane[P]: " << endl;
             cin >> c;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             c = static_cast<char>(toupper(c));
@@ -189,7 +192,16 @@ void Menu::adminMenu() {
             if (!res) {
                 return;
             }
-            cout << "The flight has been added. Do you want to add another flight or plane[P/F]: " << endl;
+            cout << "The flight has been added. Do you want to add another flight[F]: " << endl;
+            cin >> c;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            c = static_cast<char>(toupper(c));
+        } else if (c == 'R') {
+            res = createRunway();
+            if (!res) {
+                return;
+            }
+            cout << "The runway has been added. Do you want to add another runway[R]: " << endl;
             cin >> c;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             c = static_cast<char>(toupper(c));
@@ -214,7 +226,7 @@ void Menu::adminMenu() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             c = static_cast<char>(toupper(c));
         }
-    } while (c == 'P' || c == 'F' || c == 'D');
+    } while (c == 'P' || c == 'F' || c == 'D' || c == 'R');
 }
 
 bool Menu::createPlane() {
@@ -387,6 +399,19 @@ void Menu::addPlaneToFile(const Plane& plane) {
     } else {
         throw ios_base::failure("File couldn't be open");
     }
+}
+
+bool Menu::createRunway() {
+    string airportName, distance;
+    cout << "Enter runways airport name: " << endl;
+    cin >> airportName;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    if (!validNumericData("Enter runways distance(km): ", distance)) {
+        return false;
+    }
+    Runway runway(airportName, stoi(distance));
+    addRunwayToFile(runway);
+    return true;
 }
 bool Menu::createFlight() {
     string flightStatus, startingDestination, endingDestination, totalDistance;
@@ -574,6 +599,40 @@ void Menu::addFlightToFile(const Flight& flight) {
         throw ios_base::failure("File couldn't be open");
     }
 }
+void Menu::addRunwayToFile(const Runway& runway) {
+    nlohmann::json jsonRunway = runway.toJson();
+
+    if (!filesystem::exists("runway.json")) {
+        ofstream createFile("runway.json");
+        if (createFile.is_open()) {
+            createFile << "[]" << std::endl;
+            createFile.close();
+        } else {
+            throw ios_base::failure("File couldn't be created");
+        }
+    }
+
+    ifstream inputFile("runway.json");
+    nlohmann::json existingData;
+
+    if (inputFile.is_open()) {
+        inputFile >> existingData;
+        inputFile.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
+    }
+
+    existingData.push_back(jsonRunway);
+
+    ofstream outputFile("runway.json");
+
+    if (outputFile.is_open()) {
+        outputFile << existingData.dump(4) << endl;
+        outputFile.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
+    }
+}
 void Menu::userMenu() {
     char c;
     do {
@@ -645,6 +704,7 @@ int main() {
     int* ids = Menu::loadIds();
     Plane::setIdCnt(ids[0]);
     Flight::setIdCnt(ids[1]);
+    Runway::setIdCnt(ids[2]);
     Menu::welcome();
     Menu::saveIds();
     delete[] ids;

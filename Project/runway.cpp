@@ -5,6 +5,9 @@ int Runway::idCnt = 1;
 void Runway::setIdCnt(int i) {
     idCnt = i;
 }
+int Runway::getIdCnt() {
+    return idCnt;
+}
 int Runway::getId() const {
     return this->id;
 }

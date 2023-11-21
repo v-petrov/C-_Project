@@ -17,6 +17,7 @@ class Runway {
         Runway() = default;
         ~Runway() = default;
         static void setIdCnt(int id);
+        static int getIdCnt();
         [[nodiscard]] int getId() const;
         [[nodiscard]] string getAirportName() const;
         [[nodiscard]] int getDistance() const;
