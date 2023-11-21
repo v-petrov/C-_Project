@@ -166,8 +166,10 @@ void Menu::adminMenu() {
     cout << "What do you want to do?\n" << endl;
     cout << "Do you want to add a plan to the database[P]: " << endl;
     cout << "Do you want to add a flight to the database[F]: " << endl;
+    cout << "Do you want to delete a flight or a plane from the database[D]: " << endl;
     cout << "If you want to exit the admin menu press anything else[...]" << endl;
     char c;
+    int id;
     bool res;
     cin >> c;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -191,8 +193,28 @@ void Menu::adminMenu() {
             cin >> c;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             c = static_cast<char>(toupper(c));
+        } else if (c == 'D') {
+            cout << "Do you want to delete a flight or a plane[P/F]: " << endl;
+            cin >> c;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            c = static_cast<char>(toupper(c));
+            if (c == 'P') {
+                res = deletePlane("Enter plane's id that you want to delete: ", "plane.json", "Plane");
+            } else if (c == 'F') {
+                res = deleteObject("Enter flight's id that you want to delete: ", "flight.json", "Flight", id);
+            } else {
+                cout << "Please provide a correct input!" << endl;
+                return;
+            }
+            if (!res) {
+                return;
+            }
+            cout << "The flight or plane has been deleted. Do you want to delete another flight or plane[D]: " << endl;
+            cin >> c;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            c = static_cast<char>(toupper(c));
         }
-    } while (c == 'P' || c == 'F');
+    } while (c == 'P' || c == 'F' || c == 'D');
 }
 
 bool Menu::createPlane() {
@@ -303,8 +325,46 @@ bool Menu::createPlane() {
     }
     return true;
 }
+bool Menu::deletePlane(const string& text, const string& fileName, const string& text1) {
+    int id = 0;
+    deleteObject(text, fileName, text1, id);
+
+    ifstream inputFile("flight.json");
+    nlohmann::json existingData;
+
+    if (inputFile.is_open()) {
+        inputFile >> existingData;
+        inputFile.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
+    }
+
+    auto predicate = [id](const auto& flight) {
+        return flight["plainId"] == id;
+    };
+    existingData.erase(remove_if(existingData.begin(), existingData.end(), predicate), existingData.end());
+
+    ofstream outputFile("flight.json");
+    if (outputFile.is_open()) {
+        outputFile << existingData.dump(4) << endl;
+        outputFile.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
+    }
+    return true;
+}
 void Menu::addPlaneToFile(const Plane& plane) {
     nlohmann::json jsonPlane = plane.toJson();
+
+    if (!filesystem::exists("plane.json")) {
+        ofstream createFile("plane.json");
+        if (createFile.is_open()) {
+            createFile << "[]" << std::endl;
+            createFile.close();
+        } else {
+            throw ios_base::failure("File couldn't be created");
+        }
+    }
 
     ifstream inputFile("plane.json");
     nlohmann::json existingData;
@@ -399,6 +459,50 @@ bool Menu::createFlight() {
     addFlightToFile(flight);
     return true;
 }
+bool Menu::deleteObject(const string& text, const string& fileName, const string& text1, int& id) {
+    string flightId;
+    if (!validNumericData(text, flightId)) {
+        return false;
+    }
+    id = stoi(flightId);
+
+    ifstream file(fileName);
+    nlohmann::json flightData;
+    if (file.is_open()) {
+        file >> flightData;
+        file.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
+    }
+    auto it = find_if(flightData.begin(), flightData.end(), [&flightId](const auto& flight) {
+        return flight["id"] == stoi(flightId);
+    });
+
+    if (it != flightData.end()) {
+        char p;
+        cout << "CONFIRMATION!!!DO YOU WANT TO PROCEED?[Y/N]: " << endl;
+        cin >> p;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        p = static_cast<char>(toupper(p));
+        if (p == 'Y') {
+            flightData.erase(it);
+            ofstream outputFile(fileName);
+            if (outputFile.is_open()) {
+                outputFile << flightData.dump(4) << endl;
+                outputFile.close();
+            } else {
+                throw ios_base::failure("File couldn't be open");
+            }
+        } else {
+            cout << "Thank you, BYE!";
+            return false;
+        }
+    } else {
+        cout << text1 << " with ID: " << flightId << ",couldn't be found!" << endl;
+        return false;
+    }
+    return true;
+}
 bool Menu::validNumericData(const string& text, string& var) {
     int cnt1 = 0;
     bool res;
@@ -438,6 +542,16 @@ bool Menu::validPlaneId(int id) {
 }
 void Menu::addFlightToFile(const Flight& flight) {
     nlohmann::json jsonFlight = flight.toJson();
+
+    if (!filesystem::exists("flight.json")) {
+        ofstream createFile("flight.json");
+        if (createFile.is_open()) {
+            createFile << "[]" << std::endl;
+            createFile.close();
+        } else {
+            throw ios_base::failure("File couldn't be created");
+        }
+    }
 
     ifstream inputFile("flight.json");
     nlohmann::json existingData;

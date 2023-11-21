@@ -10,6 +10,8 @@ private:
     static void adminMenu();
     static void userMenu();
     static bool createPlane();
+    static bool deleteObject(const string&, const string&, const string&, int&);
+    static bool deletePlane(const string&, const string&, const string&);
     static void addPlaneToFile(const Plane&);
     static bool createFlight();
     static bool validPlaneId(int id);
