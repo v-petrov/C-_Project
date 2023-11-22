@@ -206,7 +206,7 @@ void Menu::adminMenu() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             c = static_cast<char>(toupper(c));
         } else if (c == 'D') {
-            cout << "Do you want to delete a flight or a plane[P/F]: " << endl;
+            cout << "Do you want to delete a flight, a plane or a runway[P/F/R]: " << endl;
             cin >> c;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             c = static_cast<char>(toupper(c));
@@ -214,6 +214,8 @@ void Menu::adminMenu() {
                 res = deletePlane("Enter plane's id that you want to delete: ", "plane.json", "Plane");
             } else if (c == 'F') {
                 res = deleteObject("Enter flight's id that you want to delete: ", "flight.json", "Flight", id);
+            } else if (c == 'R') {
+                res = deleteObject("Enter runway's id that you want to delete: ", "runway.json", "Runway", id);
             } else {
                 cout << "Please provide a correct input!" << endl;
                 return;
@@ -221,7 +223,7 @@ void Menu::adminMenu() {
             if (!res) {
                 return;
             }
-            cout << "The flight or plane has been deleted. Do you want to delete another flight or plane[D]: " << endl;
+            cout << "The data has been deleted. Do you want to delete something else[D]: " << endl;
             cin >> c;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             c = static_cast<char>(toupper(c));
