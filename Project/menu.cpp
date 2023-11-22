@@ -437,9 +437,49 @@ bool Menu::createFlight() {
     cout << "Enter flights starting destination: " << endl;
     cin >> startingDestination;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    int takeOffRunwayId;
+    cnt = 0;
+    do {
+        cnt++;
+        cout << "Enter take off runway id for the flight: " << endl;
+        cin >> takeOffRunwayId;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        res = validRunwayId(takeOffRunwayId);
+        if (!res) {
+            cout << "Please provide a correct runway's id for the flight.\n" << endl;
+            if (cnt == 3) {
+                cout << "Your session ended. Too many tries!\n" << endl;
+                return false;
+            }
+        }
+    } while(!res);
     cout << "Enter flights ending destination: " << endl;
     cin >> endingDestination;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    int landingRunwayId;
+    cnt = 0;
+    do {
+        cnt++;
+        cout << "Enter landing runway id for the flight: " << endl;
+        cin >> landingRunwayId;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        if (takeOffRunwayId == landingRunwayId) {
+            cout << "You can't have the same runway id for both landing and taking off";
+            if (cnt == 3) {
+                cout << "Your session ended. Too many tries!\n" << endl;
+                return false;
+            }
+            continue;
+        }
+        res = validRunwayId(landingRunwayId);
+        if (!res) {
+            cout << "Please provide a correct runway's id for the flight.\n" << endl;
+            if (cnt == 3) {
+                cout << "Your session ended. Too many tries!\n" << endl;
+                return false;
+            }
+        }
+    } while(!res);
     if (!validNumericData("Enter flights total distance(km): ", totalDistance)) {
         return false;
     }
@@ -480,7 +520,7 @@ bool Menu::createFlight() {
             }    
         }
     } while(!res);
-    Flight flight(flightStatusEnum, startingDestination, endingDestination, stod(totalDistance), dateInput, timeInput, planeId);
+    Flight flight(flightStatusEnum, startingDestination, takeOffRunwayId, endingDestination, landingRunwayId, stod(totalDistance), dateInput, timeInput, planeId);
     addFlightToFile(flight);
     return true;
 }
@@ -565,6 +605,25 @@ bool Menu::validPlaneId(int id) {
     }
     return res;
 }
+bool Menu::validRunwayId(int id) {
+    ifstream file("runway.json");
+    nlohmann::json runwayData;
+    if (file.is_open()) {
+        file >> runwayData;
+        file.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
+    }
+
+    bool res = false;
+    for (auto& runway : runwayData) {
+        if (runway["id"] == id) {
+            res = true;
+            break;
+        }
+    }
+    return res;
+}
 void Menu::addFlightToFile(const Flight& flight) {
     nlohmann::json jsonFlight = flight.toJson();
 
@@ -638,7 +697,7 @@ void Menu::userMenu() {
     do {
         cout << "What do you want to do?\n"
                 "Search for flights for specific destination[D].\n"
-                "Search for planes by airline[A].\n" << endl;
+                "Search for planes by airline[A]." << endl;
         cin >> c;
         c = static_cast<char>(toupper(c));
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -683,18 +742,18 @@ void Menu::searchByDestination(const string& sDestination, const string& eDestin
     } else {
         throw ios_base::failure("File couldn't be open");
     }
-    vector<Flight*> flights;
+    vector<shared_ptr<Flight>> flights;
 
     for (auto& flight : flightData) {
         if (flight["startingDestination"] == sDestination && flight["endingDestination"] == eDestination) {
-            Flight* f;
+            auto f = make_shared<Flight>();
             from_json(flight, *f);
             flights.push_back(f);
         }
     }
     printFlights(flights);
 }
-void Menu::printFlights(const vector<Flight*>& flights) {
+void Menu::printFlights(const vector<shared_ptr<Flight>>& flights) {
     for (const auto& flight : flights) {
         cout << "FLIGHT INFORMATION:" << endl;
         cout << *flight;

@@ -38,8 +38,16 @@ string Flight::getStartingDestination() {
     return this->startingDestination;
 }
 
+int Flight::getTakeOffRunwayId() const {
+    return this->takeoffRunwayId;
+}
+
 string Flight::getEndingDestination() {
     return this->endingDestination;
+}
+
+int Flight::getLandingRunwayId() const {
+    return this->landingRunwayId;
 }
 
 double Flight::getTotalDistance() const {
@@ -63,7 +71,9 @@ nlohmann::json Flight::toJson() const {
     jsonFlight["id"] = id;
     jsonFlight["status"] = status;
     jsonFlight["startingDestination"] = startingDestination;
+    jsonFlight["takeoffRunwayId"] = takeoffRunwayId;
     jsonFlight["endingDestination"] = endingDestination;
+    jsonFlight["landingRunwayId"] = landingRunwayId;
     jsonFlight["totalDistance"] = totalDistance;
     jsonFlight["date"] = date;
     jsonFlight["time"] = time;
@@ -75,7 +85,9 @@ void from_json(const nlohmann::json& json, Flight& flight) {
     json.at("id").get_to(flight.id);
     json.at("status").get_to(flight.status);
     json.at("startingDestination").get_to(flight.startingDestination);
+    json.at("takeoffRunwayId").get_to(flight.takeoffRunwayId);
     json.at("endingDestination").get_to(flight.endingDestination);
+    json.at("landingRunwayId").get_to(flight.landingRunwayId);
     json.at("totalDistance").get_to(flight.totalDistance);
     json.at("date").get_to(flight.date);
     json.at("time").get_to(flight.time);
@@ -99,7 +111,9 @@ ostream& operator<<(ostream& out, Flight flight) {
             break;
     }
     out << "Starting Destination: " << flight.getStartingDestination() << ", ";
+    Runway::printRunway(flight.getTakeOffRunwayId());
     out << "Ending Destination: " << flight.getEndingDestination() << ", ";
+    Runway::printRunway(flight.getLandingRunwayId());
     out << "Total distance(km): " << flight.getTotalDistance() << ", ";
     out << "Date: " << flight.getDate() << ", ";
     out << "Time: " << flight.getTime() << ".\n";

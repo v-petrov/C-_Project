@@ -17,12 +17,13 @@ private:
     static bool createRunway();
     static void addRunwayToFile(const Runway&);
     static bool validPlaneId(int id);
+    static bool validRunwayId(int);
     static bool validNumericData(const string&, string&);
     static bool credentialsInformation(string& username, string& password, bool isLogin);
     static void addFlightToFile(const Flight&);
     static void searchByDestination(const string&,const string&);
     static void searchByAirline(const string&);
-    static void printFlights(const vector<Flight*>& flights);
+    static void printFlights(const vector<shared_ptr<Flight>>& flights);
 public:
     static void welcome();
     static int* loadIds();

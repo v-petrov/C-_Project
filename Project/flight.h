@@ -16,15 +16,18 @@ private:
     int id{};
     FlightStatus status{};
     string startingDestination;
+    int takeoffRunwayId{};
     string endingDestination;
+    int landingRunwayId{};
     double totalDistance{};
     string date;
     string time;
     int plainId{};
 public:
-    Flight(FlightStatus status, string  startingDestination, string  endingDestination,
-           double totalDistance, string  date, string  time, int plainId)
-           : status(status), startingDestination(std::move(startingDestination)), endingDestination(std::move(endingDestination)), totalDistance(totalDistance),
+    Flight(FlightStatus status, string  startingDestination, int takeoffRunwayId, string  endingDestination,
+           int landingRunwayId, double totalDistance, string  date, string  time, int plainId)
+           : status(status), startingDestination(std::move(startingDestination)), takeoffRunwayId(takeoffRunwayId),
+           landingRunwayId(landingRunwayId), endingDestination(std::move(endingDestination)), totalDistance(totalDistance),
            date(std::move(date)), time(std::move(time)), plainId(plainId) {
         this->id = idCnt++;
     }
@@ -33,7 +36,9 @@ public:
     [[nodiscard]] int getId() const;
     FlightStatus getFlightStatus();
     string getStartingDestination();
+    [[nodiscard]] int getTakeOffRunwayId() const;
     string getEndingDestination();
+    [[nodiscard]] int getLandingRunwayId() const;
     [[nodiscard]] double getTotalDistance() const;
     string getDate();
     string getTime();

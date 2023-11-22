@@ -1,5 +1,6 @@
 #include <iostream>
 #include <utility>
+#include <fstream>
 #include "json.hpp"
 
 using namespace std;
@@ -18,6 +19,7 @@ class Runway {
         ~Runway() = default;
         static void setIdCnt(int id);
         static int getIdCnt();
+        static void printRunway(int);
         [[nodiscard]] int getId() const;
         [[nodiscard]] string getAirportName() const;
         [[nodiscard]] int getDistance() const;

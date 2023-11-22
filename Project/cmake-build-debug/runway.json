@@ -1,0 +1,12 @@
+[
+    {
+        "airportName": "SofiaAirport",
+        "distance": 3000,
+        "id": 3
+    },
+    {
+        "airportName": "ParisAirport",
+        "distance": 3000,
+        "id": 4
+    }
+]

@@ -1,1 +1,18 @@
-[]
+[
+    {
+        "airline": "Emirates",
+        "allCost": 1000.0,
+        "averageSpeed": 850.0,
+        "firstClass": true,
+        "id": 1,
+        "oneKmCost": 10.0,
+        "passengerSeats": 150,
+        "planeClass": {
+            "manufacturer": "Boeing",
+            "minRunwayDistance": 3000.0,
+            "model": "467",
+            "planeClass": 0
+        },
+        "tankVolume": 150
+    }
+]
