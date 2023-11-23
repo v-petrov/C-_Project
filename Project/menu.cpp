@@ -408,7 +408,7 @@ bool Menu::createRunway() {
     cout << "Enter runways airport name: " << endl;
     cin >> airportName;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    if (!validNumericData("Enter runways distance(km): ", distance)) {
+    if (!validNumericData("Enter runways distance: ", distance)) {
         return false;
     }
     Runway runway(airportName, stoi(distance));
@@ -440,13 +440,14 @@ bool Menu::createFlight() {
     cin >> startingDestination;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     int takeOffRunwayId;
+    int takeOffRunwayDistance;
     cnt = 0;
     do {
         cnt++;
         cout << "Enter take off runway id for the flight: " << endl;
         cin >> takeOffRunwayId;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        res = validRunwayId(takeOffRunwayId);
+        res = validRunwayId(takeOffRunwayId, takeOffRunwayDistance);
         if (!res) {
             cout << "Please provide a correct runway's id for the flight.\n" << endl;
             if (cnt == 3) {
@@ -459,29 +460,31 @@ bool Menu::createFlight() {
     cin >> endingDestination;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     int landingRunwayId;
+    int landingRunwayDistance;
     cnt = 0;
-    do {
-        cnt++;
-        cout << "Enter landing runway id for the flight: " << endl;
-        cin >> landingRunwayId;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        if (takeOffRunwayId == landingRunwayId) {
-            cout << "You can't have the same runway id for both landing and taking off";
-            if (cnt == 3) {
-                cout << "Your session ended. Too many tries!\n" << endl;
-                return false;
+        do {
+            cnt++;
+            cout << "Enter landing runway id for the flight: " << endl;
+            cin >> landingRunwayId;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            if (takeOffRunwayId == landingRunwayId) {
+                cout << "You can't have the same runway id for both landing and taking off.\n";
+                if (cnt == 3) {
+                    cout << "Your session ended. Too many tries!\n" << endl;
+                    return false;
+                }
+                res = false;
+                continue;
             }
-            continue;
-        }
-        res = validRunwayId(landingRunwayId);
-        if (!res) {
-            cout << "Please provide a correct runway's id for the flight.\n" << endl;
-            if (cnt == 3) {
-                cout << "Your session ended. Too many tries!\n" << endl;
-                return false;
+            res = validRunwayId(landingRunwayId, landingRunwayDistance);
+            if (!res) {
+                cout << "Please provide a correct runway's id for the flight.\n" << endl;
+                if (cnt == 3) {
+                    cout << "Your session ended. Too many tries!\n" << endl;
+                    return false;
+                }
             }
-        }
-    } while(!res);
+        } while(!res);
     if (!validNumericData("Enter flights total distance(km): ", totalDistance)) {
         return false;
     }
@@ -520,11 +523,34 @@ bool Menu::createFlight() {
                 cout << "Your session ended. Too many tries!\n" << endl;
                 return false;
             }    
+        } else {
+            if (!validPlaneMinRunwayDistance(planeId, takeOffRunwayDistance, landingRunwayDistance)) {
+                cout << "Plane's minimal runway distance is longer than one or both of the runways! Please choose different plane." << endl;
+                res = false;
+            }
         }
     } while(!res);
     Flight flight(flightStatusEnum, startingDestination, takeOffRunwayId, endingDestination, landingRunwayId, stod(totalDistance), dateInput, timeInput, planeId);
     addFlightToFile(flight);
     return true;
+}
+bool Menu::validPlaneMinRunwayDistance(int planeId, int takeOffDistance, int landingDistance) {
+    ifstream file("plane.json");
+    nlohmann::json planes;
+    if (file.is_open()) {
+        file >> planes;
+        file.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
+    }
+    for (auto plane : planes) {
+        if (plane["id"] == planeId) {
+            nlohmann::json planeClass = plane["planeClass"];
+            double minDistance = planeClass["minRunwayDistance"];
+            return minDistance <= takeOffDistance && minDistance <= landingDistance;
+        }
+    }
+    return false;
 }
 bool Menu::deleteObject(const string& text, const string& fileName, const string& text1, int& id) {
     string flightId;
@@ -607,7 +633,7 @@ bool Menu::validPlaneId(int id) {
     }
     return res;
 }
-bool Menu::validRunwayId(int id) {
+bool Menu::validRunwayId(int id, int& runwayDistance) {
     ifstream file("runway.json");
     nlohmann::json runwayData;
     if (file.is_open()) {
@@ -620,6 +646,7 @@ bool Menu::validRunwayId(int id) {
     bool res = false;
     for (auto& runway : runwayData) {
         if (runway["id"] == id) {
+            runwayDistance = runway["distance"];
             res = true;
             break;
         }
@@ -699,7 +726,8 @@ void Menu::userMenu() {
     do {
         cout << "What do you want to do?\n"
                 "Search for flights for specific destination[D].\n"
-                "Search for planes by airline[A]." << endl;
+                "Search for planes by airline[A].\n"
+                "If you want to exit the user menu press anything else[...]"<< endl;
         cin >> c;
         c = static_cast<char>(toupper(c));
         cin.ignore(numeric_limits<streamsize>::max(), '\n');

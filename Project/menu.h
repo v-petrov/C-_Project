@@ -17,7 +17,8 @@ private:
     static bool createRunway();
     static void addRunwayToFile(const Runway&);
     static bool validPlaneId(int id);
-    static bool validRunwayId(int);
+    static bool validRunwayId(int, int&);
+    static bool validPlaneMinRunwayDistance(int, int, int);
     static bool validNumericData(const string&, string&);
     static bool credentialsInformation(string& username, string& password, bool isLogin);
     static void addFlightToFile(const Flight&);
