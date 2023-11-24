@@ -51,6 +51,7 @@ void Menu::welcome() {
         }
         cout << "Login or Registration[L/R]:  "<< endl;
         cin >> c;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         c = static_cast<char>(toupper(c));
         switch (c) {
             case 'L':
@@ -121,9 +122,9 @@ void Menu::registration() {
 
 bool Menu::credentialsInformation(string& username, string& password, bool isLogin) {
     cout << "Enter your username: " << endl;
-    cin >> username;
+    getline(cin, username);
     cout << "Enter your password: " << endl;
-    cin >> password;
+    getline(cin, password);
     return isUsernameAvailable(username, password, isLogin);
 }
 bool Menu::isUsernameAvailable(const string& username, const string& password, bool isLogin) {
@@ -169,7 +170,7 @@ void Menu::adminMenu() {
     cout << "Do you want to add a plan to the database[P]: " << endl;
     cout << "Do you want to add a flight to the database[F]: " << endl;
     cout << "Do you want to add a runway to the database[R]: " << endl;
-    cout << "Do you want to delete a flight or a plane from the database[D]: " << endl;
+    cout << "Do you want to delete a flight, a plane or a runway from the database[D]: " << endl;
     cout << "If you want to exit the admin menu press anything else[...]" << endl;
     char c;
     int id;
@@ -183,7 +184,8 @@ void Menu::adminMenu() {
             if (!res) {
                 return;
             }
-            cout << "The plane has been added. Do you want to add another plane[P]: " << endl;
+            cout << "The plane has been added. Do you want to add another plane, flight or a runway[P/F/R]: " << endl;
+            cout << "If you want to exit the admin menu press anything else[...]" << endl;
             cin >> c;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             c = static_cast<char>(toupper(c));
@@ -192,7 +194,8 @@ void Menu::adminMenu() {
             if (!res) {
                 return;
             }
-            cout << "The flight has been added. Do you want to add another flight[F]: " << endl;
+            cout << "The flight has been added. Do you want to add another flight, plane or a runway[F/P/R]: " << endl;
+            cout << "If you want to exit the admin menu press anything else[...]" << endl;
             cin >> c;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             c = static_cast<char>(toupper(c));
@@ -201,7 +204,8 @@ void Menu::adminMenu() {
             if (!res) {
                 return;
             }
-            cout << "The runway has been added. Do you want to add another runway[R]: " << endl;
+            cout << "The runway has been added. Do you want to add another runway, plane or a flight[R/P/F]: " << endl;
+            cout << "If you want to exit the admin menu press anything else[...]" << endl;
             cin >> c;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             c = static_cast<char>(toupper(c));
@@ -236,11 +240,9 @@ bool Menu::createPlane() {
     cnt = 0;
 
     cout << "Enter plain's manufacturer: " << endl;
-    cin >> manufacturer;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, manufacturer);
     cout << "Enter plain's model: " << endl;
-    cin >> model;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, model);
     if (!validNumericData("Enter plain's minimum runway distance: ", minRunwayDistance)) {
         return false;
     }
@@ -249,8 +251,7 @@ bool Menu::createPlane() {
     string airline, oneKmCost, tankVolume, allCost, averageSpeed;
 
     cout << "Enter plain's airline: " << endl;
-    cin >> airline;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, airline);
     if (!validNumericData("Enter plain's one kilometer cost: ", oneKmCost)) {
         return false;
     }
@@ -269,8 +270,8 @@ bool Menu::createPlane() {
         cnt++;
         cout << "What type of plane do you want to add[PASSENGERS, BUSINESS, CARGO]: " << endl;
         string planeType;
-        cin >> planeType;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, planeType);
+        transform(planeType.begin(), planeType.end(), planeType.begin(), ::toupper);
         PlaneType pt = stringToEnum(planeType);
 
         switch (pt) {
@@ -280,8 +281,7 @@ bool Menu::createPlane() {
                     return false;
                 }
                 cout << "Enter if the plain has first class[TRUE/FALSE]: " << endl;
-                cin >> firstClass;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                getline(cin, firstClass);
                 bool firstClassBool = (firstClass == "TRUE" || firstClass == "true");
 
                 PassengerPlane passengerPlane(planeClass, airline, stod(oneKmCost), stod(allCost), stoi(tankVolume), stod(averageSpeed), stoi(passengerSeats), firstClassBool);
@@ -294,13 +294,11 @@ bool Menu::createPlane() {
                     return false;
                 }
                 cout << "Enter if the plain has flight entertainment[TRUE/FALSE]: " << endl;
-                cin >> flightEntertainment;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                getline(cin, flightEntertainment);
                 bool flightEntertainmentBool = (flightEntertainment == "TRUE" || flightEntertainment == "true");
 
                 cout << "Enter if plain has private suites[TRUE/FALSE]: " << endl;
-                cin >> privateSuites;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                getline(cin, privateSuites);
                 bool privateSuitesBool = (privateSuites == "TRUE" || privateSuites == "true");
 
                 BusinessPlane businessPlane(planeClass, airline, stod(oneKmCost), stod(allCost), stoi(tankVolume), stod(averageSpeed), stoi(passengerSeats), flightEntertainmentBool, privateSuitesBool);
@@ -316,8 +314,7 @@ bool Menu::createPlane() {
                     return false;
                 }
                 cout << "Enter if plain has temperature control[TRUE/FALSE]: " << endl;
-                cin >> temperatureControl;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                getline(cin, temperatureControl);
                 bool temperatureControlBool = (temperatureControl == "TRUE" || temperatureControl == "true");
 
                 CargoPlane cargoPlane(planeClass, airline, stod(oneKmCost), stod(allCost), stoi(tankVolume), stod(averageSpeed), stod(capacity), stoi(numberOfCompartments), temperatureControlBool);
@@ -406,8 +403,7 @@ void Menu::addPlaneToFile(const Plane& plane) {
 bool Menu::createRunway() {
     string airportName, distance;
     cout << "Enter runways airport name: " << endl;
-    cin >> airportName;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, airportName);
     if (!validNumericData("Enter runways distance: ", distance)) {
         return false;
     }
@@ -423,9 +419,8 @@ bool Menu::createFlight() {
     do {
         cnt++;
         cout << "Enter flights status[FINISHED, ONGOING, INCOMING]: " << endl;
-        cin >> flightStatus;
-
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, flightStatus);
+        transform(flightStatus.begin(), flightStatus.end(), flightStatus.begin(), ::toupper);
         flightStatusEnum = stringToEnumFlight(flightStatus);
         if (flightStatusEnum == ERROR) {
             cout << "Please provide a correct status.\n";
@@ -437,8 +432,7 @@ bool Menu::createFlight() {
     } while (flightStatusEnum == ERROR);
 
     cout << "Enter flights starting destination: " << endl;
-    cin >> startingDestination;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, startingDestination);
     int takeOffRunwayId;
     int takeOffRunwayDistance;
     cnt = 0;
@@ -457,8 +451,7 @@ bool Menu::createFlight() {
         }
     } while(!res);
     cout << "Enter flights ending destination: " << endl;
-    cin >> endingDestination;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, endingDestination);
     int landingRunwayId;
     int landingRunwayDistance;
     cnt = 0;
@@ -494,11 +487,9 @@ bool Menu::createFlight() {
     do {
         cnt++;
         cout << "Enter date of the flight(YYYY-MM-DD): " << endl;
-        cin >> dateInput;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, dateInput);
         cout << "Enter time of the flight(HH:MM): " << endl;
-        cin >> timeInput;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, timeInput);
         res = regex_match(dateInput, dateRegex) && regex_match(timeInput, timeRegex);
         if (!res) {
             cout << "Please provide a correct format of the data!.\n" << endl;
@@ -602,7 +593,7 @@ bool Menu::validNumericData(const string& text, string& var) {
     do {
         cnt1++;
         cout << text << endl;
-        cin >> var;
+        getline(cin, var);
         res = regex_match(var, numericRegex);
         if (!res) {
             cout << "Please provide a numeric value.\n" << endl;
@@ -729,25 +720,22 @@ void Menu::userMenu() {
                 "Search for planes by airline[A].\n"
                 "If you want to exit the user menu press anything else[...]"<< endl;
         cin >> c;
-        c = static_cast<char>(toupper(c));
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        c = static_cast<char>(toupper(c));
         switch (c) {
             case 'D': {
                 cout << "Enter starting destination: " << endl;
                 string sDestination;
-                cin >> sDestination;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                getline(cin, sDestination);
                 cout << "Enter ending destination: " << endl;
                 string eDestination;
-                cin >> eDestination;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                getline(cin, eDestination);
                 searchByDestination(sDestination, eDestination);
                 break;
             } case 'A': {
                 cout << "Enter the airline: " << endl;
                 string airline;
-                cin >> airline;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                getline(cin, airline);
                 searchByAirline(airline);
                 break;
             } default: {
@@ -756,8 +744,8 @@ void Menu::userMenu() {
         }
         cout << "Do you want to continue searching[Y/N]: " << endl;
         cin >> c;
-        c = static_cast<char>(toupper(c));
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        c = static_cast<char>(toupper(c));
     } while(c == 'Y');
 }
 void Menu::searchByAirline(const string& airline) {
