@@ -6,6 +6,9 @@
 #include "json.hpp"
 using namespace std;
 
+#ifndef PROJECT_PLANE_H
+#define PROJECT_PLANE_H
+
 enum Class {
     A, B, C
 };
@@ -136,7 +139,5 @@ public:
     friend void from_json(const nlohmann::json& json, CargoPlane& cargoPlane);
     friend ostream& operator<<(ostream& out, const CargoPlane& cargoPlane);
 };
-#ifndef PLANE_H
-#define PLANE_H
 
 #endif //PLANE_H

@@ -296,4 +296,7 @@ CMakeFiles/Project.dir/menu.cpp.obj: \
  E:/Files/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stl_numeric.h \
  E:/Files/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_numeric_defs.h \
  E:/Files/CLion\ 2023.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/any \
- C:\Users\vasil\OneDrive\Desktop\Cpp\Project\runway.h
+ C:\Users\vasil\OneDrive\Desktop\Cpp\Project\runway.h \
+ C:\Users\vasil\OneDrive\Desktop\Cpp\Project\validation.h \
+ C:\Users\vasil\OneDrive\Desktop\Cpp\Project\objects.h \
+ C:\Users\vasil\OneDrive\Desktop\Cpp\Project\files.h

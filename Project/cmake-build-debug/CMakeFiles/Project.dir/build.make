@@ -124,12 +124,72 @@ CMakeFiles/Project.dir/runway.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Project.dir/runway.cpp.s"
 	"E:\Files\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\vasil\OneDrive\Desktop\Cpp\Project\runway.cpp -o CMakeFiles\Project.dir\runway.cpp.s
 
+CMakeFiles/Project.dir/files.cpp.obj: CMakeFiles/Project.dir/flags.make
+CMakeFiles/Project.dir/files.cpp.obj: C:/Users/vasil/OneDrive/Desktop/Cpp/Project/files.cpp
+CMakeFiles/Project.dir/files.cpp.obj: CMakeFiles/Project.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\vasil\OneDrive\Desktop\Cpp\Project\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Project.dir/files.cpp.obj"
+	"E:\Files\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Project.dir/files.cpp.obj -MF CMakeFiles\Project.dir\files.cpp.obj.d -o CMakeFiles\Project.dir\files.cpp.obj -c C:\Users\vasil\OneDrive\Desktop\Cpp\Project\files.cpp
+
+CMakeFiles/Project.dir/files.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Project.dir/files.cpp.i"
+	"E:\Files\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\vasil\OneDrive\Desktop\Cpp\Project\files.cpp > CMakeFiles\Project.dir\files.cpp.i
+
+CMakeFiles/Project.dir/files.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Project.dir/files.cpp.s"
+	"E:\Files\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\vasil\OneDrive\Desktop\Cpp\Project\files.cpp -o CMakeFiles\Project.dir\files.cpp.s
+
+CMakeFiles/Project.dir/objects.cpp.obj: CMakeFiles/Project.dir/flags.make
+CMakeFiles/Project.dir/objects.cpp.obj: C:/Users/vasil/OneDrive/Desktop/Cpp/Project/objects.cpp
+CMakeFiles/Project.dir/objects.cpp.obj: CMakeFiles/Project.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\vasil\OneDrive\Desktop\Cpp\Project\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Project.dir/objects.cpp.obj"
+	"E:\Files\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Project.dir/objects.cpp.obj -MF CMakeFiles\Project.dir\objects.cpp.obj.d -o CMakeFiles\Project.dir\objects.cpp.obj -c C:\Users\vasil\OneDrive\Desktop\Cpp\Project\objects.cpp
+
+CMakeFiles/Project.dir/objects.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Project.dir/objects.cpp.i"
+	"E:\Files\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\vasil\OneDrive\Desktop\Cpp\Project\objects.cpp > CMakeFiles\Project.dir\objects.cpp.i
+
+CMakeFiles/Project.dir/objects.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Project.dir/objects.cpp.s"
+	"E:\Files\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\vasil\OneDrive\Desktop\Cpp\Project\objects.cpp -o CMakeFiles\Project.dir\objects.cpp.s
+
+CMakeFiles/Project.dir/validation.cpp.obj: CMakeFiles/Project.dir/flags.make
+CMakeFiles/Project.dir/validation.cpp.obj: C:/Users/vasil/OneDrive/Desktop/Cpp/Project/validation.cpp
+CMakeFiles/Project.dir/validation.cpp.obj: CMakeFiles/Project.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\vasil\OneDrive\Desktop\Cpp\Project\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Project.dir/validation.cpp.obj"
+	"E:\Files\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Project.dir/validation.cpp.obj -MF CMakeFiles\Project.dir\validation.cpp.obj.d -o CMakeFiles\Project.dir\validation.cpp.obj -c C:\Users\vasil\OneDrive\Desktop\Cpp\Project\validation.cpp
+
+CMakeFiles/Project.dir/validation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Project.dir/validation.cpp.i"
+	"E:\Files\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\vasil\OneDrive\Desktop\Cpp\Project\validation.cpp > CMakeFiles\Project.dir\validation.cpp.i
+
+CMakeFiles/Project.dir/validation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Project.dir/validation.cpp.s"
+	"E:\Files\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\vasil\OneDrive\Desktop\Cpp\Project\validation.cpp -o CMakeFiles\Project.dir\validation.cpp.s
+
+CMakeFiles/Project.dir/main.cpp.obj: CMakeFiles/Project.dir/flags.make
+CMakeFiles/Project.dir/main.cpp.obj: C:/Users/vasil/OneDrive/Desktop/Cpp/Project/main.cpp
+CMakeFiles/Project.dir/main.cpp.obj: CMakeFiles/Project.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\vasil\OneDrive\Desktop\Cpp\Project\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Project.dir/main.cpp.obj"
+	"E:\Files\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Project.dir/main.cpp.obj -MF CMakeFiles\Project.dir\main.cpp.obj.d -o CMakeFiles\Project.dir\main.cpp.obj -c C:\Users\vasil\OneDrive\Desktop\Cpp\Project\main.cpp
+
+CMakeFiles/Project.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Project.dir/main.cpp.i"
+	"E:\Files\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\vasil\OneDrive\Desktop\Cpp\Project\main.cpp > CMakeFiles\Project.dir\main.cpp.i
+
+CMakeFiles/Project.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Project.dir/main.cpp.s"
+	"E:\Files\CLion 2023.2.2\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\vasil\OneDrive\Desktop\Cpp\Project\main.cpp -o CMakeFiles\Project.dir\main.cpp.s
+
 # Object files for target Project
 Project_OBJECTS = \
 "CMakeFiles/Project.dir/plane.cpp.obj" \
 "CMakeFiles/Project.dir/flight.cpp.obj" \
 "CMakeFiles/Project.dir/menu.cpp.obj" \
-"CMakeFiles/Project.dir/runway.cpp.obj"
+"CMakeFiles/Project.dir/runway.cpp.obj" \
+"CMakeFiles/Project.dir/files.cpp.obj" \
+"CMakeFiles/Project.dir/objects.cpp.obj" \
+"CMakeFiles/Project.dir/validation.cpp.obj" \
+"CMakeFiles/Project.dir/main.cpp.obj"
 
 # External object files for target Project
 Project_EXTERNAL_OBJECTS =
@@ -138,11 +198,15 @@ Project.exe: CMakeFiles/Project.dir/plane.cpp.obj
 Project.exe: CMakeFiles/Project.dir/flight.cpp.obj
 Project.exe: CMakeFiles/Project.dir/menu.cpp.obj
 Project.exe: CMakeFiles/Project.dir/runway.cpp.obj
+Project.exe: CMakeFiles/Project.dir/files.cpp.obj
+Project.exe: CMakeFiles/Project.dir/objects.cpp.obj
+Project.exe: CMakeFiles/Project.dir/validation.cpp.obj
+Project.exe: CMakeFiles/Project.dir/main.cpp.obj
 Project.exe: CMakeFiles/Project.dir/build.make
 Project.exe: CMakeFiles/Project.dir/linkLibs.rsp
 Project.exe: CMakeFiles/Project.dir/objects1.rsp
 Project.exe: CMakeFiles/Project.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\vasil\OneDrive\Desktop\Cpp\Project\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Project.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\vasil\OneDrive\Desktop\Cpp\Project\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Project.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Project.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

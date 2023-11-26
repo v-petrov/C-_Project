@@ -1,8 +1,10 @@
 #include <utility>
-
 #include "plane.h"
 #include "runway.h"
 using namespace std;
+
+#ifndef PROJECT_FLIGHT_H
+#define PROJECT_FLIGHT_H
 
 enum FlightStatus {
     FINISHED, ONGOING, INCOMING, ERROR
@@ -49,7 +51,5 @@ public:
     friend void from_json(const nlohmann::json& json, Flight& flight);
     friend ostream& operator<<(ostream& out, Flight flight);
 };
-#ifndef PROJECT_FLIGHT_H
-#define PROJECT_FLIGHT_H
 
 #endif //PROJECT_FLIGHT_H

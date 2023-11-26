@@ -82,16 +82,31 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/vasil/OneDrive/Desktop/Cpp/Project/files.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="C:/Users/vasil/OneDrive/Desktop/Cpp/Project/files.h">
+			<Option target="Project"/>
+		</Unit>
 		<Unit filename="C:/Users/vasil/OneDrive/Desktop/Cpp/Project/flight.cpp">
 			<Option target="Project"/>
 		</Unit>
 		<Unit filename="C:/Users/vasil/OneDrive/Desktop/Cpp/Project/flight.h">
 			<Option target="Project"/>
 		</Unit>
+		<Unit filename="C:/Users/vasil/OneDrive/Desktop/Cpp/Project/main.cpp">
+			<Option target="Project"/>
+		</Unit>
 		<Unit filename="C:/Users/vasil/OneDrive/Desktop/Cpp/Project/menu.cpp">
 			<Option target="Project"/>
 		</Unit>
 		<Unit filename="C:/Users/vasil/OneDrive/Desktop/Cpp/Project/menu.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="C:/Users/vasil/OneDrive/Desktop/Cpp/Project/objects.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="C:/Users/vasil/OneDrive/Desktop/Cpp/Project/objects.h">
 			<Option target="Project"/>
 		</Unit>
 		<Unit filename="C:/Users/vasil/OneDrive/Desktop/Cpp/Project/plane.cpp">
@@ -104,6 +119,12 @@
 			<Option target="Project"/>
 		</Unit>
 		<Unit filename="C:/Users/vasil/OneDrive/Desktop/Cpp/Project/runway.h">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="C:/Users/vasil/OneDrive/Desktop/Cpp/Project/validation.cpp">
+			<Option target="Project"/>
+		</Unit>
+		<Unit filename="C:/Users/vasil/OneDrive/Desktop/Cpp/Project/validation.h">
 			<Option target="Project"/>
 		</Unit>
 		<Unit filename="C:/Users/vasil/OneDrive/Desktop/Cpp/Project/CMakeLists.txt">

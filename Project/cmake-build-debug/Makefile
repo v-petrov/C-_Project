@@ -128,6 +128,30 @@ Project/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/build
 .PHONY : Project/fast
 
+files.obj: files.cpp.obj
+.PHONY : files.obj
+
+# target to build an object file
+files.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/files.cpp.obj
+.PHONY : files.cpp.obj
+
+files.i: files.cpp.i
+.PHONY : files.i
+
+# target to preprocess a source file
+files.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/files.cpp.i
+.PHONY : files.cpp.i
+
+files.s: files.cpp.s
+.PHONY : files.s
+
+# target to generate assembly for a file
+files.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/files.cpp.s
+.PHONY : files.cpp.s
+
 flight.obj: flight.cpp.obj
 .PHONY : flight.obj
 
@@ -152,6 +176,30 @@ flight.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/flight.cpp.s
 .PHONY : flight.cpp.s
 
+main.obj: main.cpp.obj
+.PHONY : main.obj
+
+# target to build an object file
+main.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/main.cpp.obj
+.PHONY : main.cpp.obj
+
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/main.cpp.s
+.PHONY : main.cpp.s
+
 menu.obj: menu.cpp.obj
 .PHONY : menu.obj
 
@@ -175,6 +223,30 @@ menu.s: menu.cpp.s
 menu.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/menu.cpp.s
 .PHONY : menu.cpp.s
+
+objects.obj: objects.cpp.obj
+.PHONY : objects.obj
+
+# target to build an object file
+objects.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/objects.cpp.obj
+.PHONY : objects.cpp.obj
+
+objects.i: objects.cpp.i
+.PHONY : objects.i
+
+# target to preprocess a source file
+objects.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/objects.cpp.i
+.PHONY : objects.cpp.i
+
+objects.s: objects.cpp.s
+.PHONY : objects.s
+
+# target to generate assembly for a file
+objects.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/objects.cpp.s
+.PHONY : objects.cpp.s
 
 plane.obj: plane.cpp.obj
 .PHONY : plane.obj
@@ -224,6 +296,30 @@ runway.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/runway.cpp.s
 .PHONY : runway.cpp.s
 
+validation.obj: validation.cpp.obj
+.PHONY : validation.obj
+
+# target to build an object file
+validation.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/validation.cpp.obj
+.PHONY : validation.cpp.obj
+
+validation.i: validation.cpp.i
+.PHONY : validation.i
+
+# target to preprocess a source file
+validation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/validation.cpp.i
+.PHONY : validation.cpp.i
+
+validation.s: validation.cpp.s
+.PHONY : validation.s
+
+# target to generate assembly for a file
+validation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Project.dir\build.make CMakeFiles/Project.dir/validation.cpp.s
+.PHONY : validation.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -233,18 +329,30 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Project
+	@echo ... files.obj
+	@echo ... files.i
+	@echo ... files.s
 	@echo ... flight.obj
 	@echo ... flight.i
 	@echo ... flight.s
+	@echo ... main.obj
+	@echo ... main.i
+	@echo ... main.s
 	@echo ... menu.obj
 	@echo ... menu.i
 	@echo ... menu.s
+	@echo ... objects.obj
+	@echo ... objects.i
+	@echo ... objects.s
 	@echo ... plane.obj
 	@echo ... plane.i
 	@echo ... plane.s
 	@echo ... runway.obj
 	@echo ... runway.i
 	@echo ... runway.s
+	@echo ... validation.obj
+	@echo ... validation.i
+	@echo ... validation.s
 .PHONY : help
 
 

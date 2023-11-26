@@ -2,8 +2,10 @@
 #include <utility>
 #include <fstream>
 #include "json.hpp"
-
 using namespace std;
+
+#ifndef PROJECT_RUNWAY_H
+#define PROJECT_RUNWAY_H
 
 class Runway {
     private:
@@ -27,8 +29,5 @@ class Runway {
         friend void from_json(const nlohmann::json&, Runway&);
         friend ostream& operator<<(ostream&, const Runway&);
 };
-
-#ifndef PROJECT_RUNWAY_H
-#define PROJECT_RUNWAY_H
 
 #endif //PROJECT_RUNWAY_H

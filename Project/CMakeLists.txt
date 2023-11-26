@@ -12,4 +12,11 @@ add_executable(Project
         menu.cpp
         runway.h
         runway.cpp
+        files.h
+        objects.h
+        validation.h
+        files.cpp
+        objects.cpp
+        validation.cpp
+        main.cpp
 )
