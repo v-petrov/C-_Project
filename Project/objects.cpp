@@ -56,7 +56,7 @@ bool ObjectsManaging::createPlane() {
 
                 PassengerPlane passengerPlane(planeClass, airline, stod(oneKmCost), stod(allCost), stoi(tankVolume), stod(averageSpeed), stoi(passengerSeats), firstClassBool);
                 const Plane& plane = passengerPlane;
-                FilesHandling::addPlaneToFile(plane);
+                FilesHandling::addDataToFile(plane, "plane.json");
                 break;
             } case BUSINESS: {
                 string passengerSeats, flightEntertainment, privateSuites;
@@ -73,7 +73,7 @@ bool ObjectsManaging::createPlane() {
 
                 BusinessPlane businessPlane(planeClass, airline, stod(oneKmCost), stod(allCost), stoi(tankVolume), stod(averageSpeed), stoi(passengerSeats), flightEntertainmentBool, privateSuitesBool);
                 const Plane& plane = businessPlane;
-                FilesHandling::addPlaneToFile(plane);
+                FilesHandling::addDataToFile(plane, "plane.json");
                 break;
             } case CARGO: {
                 string capacity, numberOfCompartments, temperatureControl;
@@ -89,7 +89,7 @@ bool ObjectsManaging::createPlane() {
 
                 CargoPlane cargoPlane(planeClass, airline, stod(oneKmCost), stod(allCost), stoi(tankVolume), stod(averageSpeed), stod(capacity), stoi(numberOfCompartments), temperatureControlBool);
                 const Plane& plane = cargoPlane;
-                FilesHandling::addPlaneToFile(plane);
+                FilesHandling::addDataToFile(plane, "plane.json");
                 break;
             } default:
                 cout << "No such plane type. Please provide a correct one!\n" << endl;
@@ -114,7 +114,7 @@ bool ObjectsManaging::createRunway() {
         return false;
     }
     Runway runway(airportName, stoi(distance));
-    FilesHandling::addRunwayToFile(runway);
+    FilesHandling::addDataToFile(runway, "runway.json");
     return true;
 }
 bool ObjectsManaging::createFlight() {
@@ -228,7 +228,7 @@ bool ObjectsManaging::createFlight() {
         }
     } while(!res);
     Flight flight(flightStatusEnum, startingDestination, takeOffRunwayId, endingDestination, landingRunwayId, stod(totalDistance), dateInput, timeInput, planeId);
-    FilesHandling::addFlightToFile(flight);
+    FilesHandling::addDataToFile(flight, "flight.json");
     return true;
 }
 bool ObjectsManaging::deleteObject(const string& text, const string& fileName, const string& text1, int& id) {

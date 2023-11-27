@@ -1,5 +1,42 @@
 #include "files.h"
 
+int* FilesHandling::loadIds() {
+    int* idPointer = new int[3];
+    ifstream file("ids.txt");
+    if (file.is_open()) {
+        string line;
+        getline(file, line);
+        size_t pos = line.find(',');
+        if (pos != string::npos) {
+            string planeIds = line.substr(0, pos);
+            string flightIds = line.substr(pos + 1);
+            string runwayIds = line.substr(pos + 3);
+            idPointer[0] = stoi(planeIds);
+            idPointer[1] = stoi(flightIds);
+            idPointer[2] = stoi(runwayIds);
+        }
+    } else {
+        throw ios_base::failure("File couldn't be open");
+    }
+    return idPointer;
+}
+void FilesHandling::saveIds(const int* ids) {
+    ofstream file("ids.txt");
+    if (file.is_open()) {
+        file << Plane::getIdCnt() << "," << Flight::getIdCnt() << "," << Runway::getIdCnt() << endl;
+        file.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
+    }
+    delete[] ids;
+}
+int* FilesHandling::setIds() {
+    int* ids = loadIds();
+    Plane::setIdCnt(ids[0]);
+    Flight::setIdCnt(ids[1]);
+    Runway::setIdCnt(ids[2]);
+    return ids;
+}
 bool FilesHandling::isUsernameAvailable(const string& username, const string& password, bool isLogin) {
     ifstream file("admin.txt");
     if (file.is_open()) {
@@ -37,11 +74,11 @@ void FilesHandling::saveUser(const string &username, const string &password) {
         throw ios_base::failure("File couldn't be open");
     }
 }
-void FilesHandling::addPlaneToFile(const Plane& plane) {
-    nlohmann::json jsonPlane = plane.toJson();
+void FilesHandling::addDataToFile(const WriteToFile& data, const string& fileName) {
+    nlohmann::json jsonData = data.toJson();
 
-    if (!filesystem::exists("plane.json")) {
-        ofstream createFile("plane.json");
+    if (!filesystem::exists(fileName)) {
+        ofstream createFile(fileName);
         if (createFile.is_open()) {
             createFile << "[]" << std::endl;
             createFile.close();
@@ -50,7 +87,7 @@ void FilesHandling::addPlaneToFile(const Plane& plane) {
         }
     }
 
-    ifstream inputFile("plane.json");
+    ifstream inputFile(fileName);
     nlohmann::json existingData;
 
     if (inputFile.is_open()) {
@@ -61,43 +98,9 @@ void FilesHandling::addPlaneToFile(const Plane& plane) {
         throw ios_base::failure("File couldn't be open");
     }
 
-    existingData.push_back(jsonPlane);
+    existingData.push_back(jsonData);
 
-    ofstream outputFile("plane.json");
-
-    if (outputFile.is_open()) {
-        outputFile << existingData.dump(4) << endl;
-        outputFile.close();
-    } else {
-        throw ios_base::failure("File couldn't be open");
-    }
-}
-void FilesHandling::addFlightToFile(const Flight& flight) {
-    nlohmann::json jsonFlight = flight.toJson();
-
-    if (!filesystem::exists("flight.json")) {
-        ofstream createFile("flight.json");
-        if (createFile.is_open()) {
-            createFile << "[]" << std::endl;
-            createFile.close();
-        } else {
-            throw ios_base::failure("File couldn't be created");
-        }
-    }
-
-    ifstream inputFile("flight.json");
-    nlohmann::json existingData;
-
-    if (inputFile.is_open()) {
-        inputFile >> existingData;
-        inputFile.close();
-    } else {
-        throw ios_base::failure("File couldn't be open");
-    }
-
-    existingData.push_back(jsonFlight);
-
-    ofstream outputFile("flight.json");
+    ofstream outputFile(fileName);
 
     if (outputFile.is_open()) {
         outputFile << existingData.dump(4) << endl;
@@ -105,77 +108,4 @@ void FilesHandling::addFlightToFile(const Flight& flight) {
     } else {
         throw ios_base::failure("File couldn't be open");
     }
-}
-void FilesHandling::addRunwayToFile(const Runway& runway) {
-    nlohmann::json jsonRunway = runway.toJson();
-
-    if (!filesystem::exists("runway.json")) {
-        ofstream createFile("runway.json");
-        if (createFile.is_open()) {
-            createFile << "[]" << std::endl;
-            createFile.close();
-        } else {
-            throw ios_base::failure("File couldn't be created");
-        }
-    }
-
-    ifstream inputFile("runway.json");
-    nlohmann::json existingData;
-
-    if (inputFile.is_open()) {
-        inputFile >> existingData;
-        inputFile.close();
-    } else {
-        throw ios_base::failure("File couldn't be open");
-    }
-
-    existingData.push_back(jsonRunway);
-
-    ofstream outputFile("runway.json");
-
-    if (outputFile.is_open()) {
-        outputFile << existingData.dump(4) << endl;
-        outputFile.close();
-    } else {
-        throw ios_base::failure("File couldn't be open");
-    }
-}
-void FilesHandling::saveIds(const int* ids) {
-    ofstream file("ids.txt");
-    if (file.is_open()) {
-        file << Plane::getIdCnt() << "," << Flight::getIdCnt() << "," << Runway::getIdCnt() << endl;
-        file.close();
-    } else {
-        throw ios_base::failure("File couldn't be open");
-    }
-    delete[] ids;
-}
-
-int* FilesHandling::loadIds() {
-    int* idPointer = new int[3];
-    ifstream file("ids.txt");
-    if (file.is_open()) {
-        string line;
-        getline(file, line);
-        size_t pos = line.find(',');
-        if (pos != string::npos) {
-            string planeIds = line.substr(0, pos);
-            string flightIds = line.substr(pos + 1);
-            string runwayIds = line.substr(pos + 3);
-            idPointer[0] = stoi(planeIds);
-            idPointer[1] = stoi(flightIds);
-            idPointer[2] = stoi(runwayIds);
-        }
-    } else {
-        throw ios_base::failure("File couldn't be open");
-    }
-    return idPointer;
-}
-
-int* FilesHandling::setIds() {
-    int* ids = loadIds();
-    Plane::setIdCnt(ids[0]);
-    Flight::setIdCnt(ids[1]);
-    Runway::setIdCnt(ids[2]);
-    return ids;
 }

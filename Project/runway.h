@@ -1,13 +1,10 @@
-#include <iostream>
-#include <utility>
-#include <fstream>
-#include "json.hpp"
+#include "plane.h"
 using namespace std;
 
 #ifndef PROJECT_RUNWAY_H
 #define PROJECT_RUNWAY_H
 
-class Runway {
+class Runway : public WriteToFile {
     private:
         static int idCnt;
         int id{};

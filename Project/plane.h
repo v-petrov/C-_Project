@@ -9,6 +9,11 @@ using namespace std;
 #ifndef PROJECT_PLANE_H
 #define PROJECT_PLANE_H
 
+class WriteToFile {
+public:
+    [[nodiscard]] virtual nlohmann::json toJson() const;
+};
+
 enum Class {
     A, B, C
 };
@@ -47,7 +52,7 @@ public:
     friend ostream& operator<<(ostream& out, const PlaneClass& planeClass1);
 };
 
-class Plane {
+class Plane : public WriteToFile {
 private:
     static int idCnt;
     int id{};
@@ -77,7 +82,7 @@ public:
     static void printPlane(const string&, const string&);
     void deserializeCommonData(const nlohmann::json& jsonPlane);
     virtual PlaneType typeOfPlane() = 0;
-    [[nodiscard]] virtual nlohmann::json toJson() const;
+    [[nodiscard]] nlohmann::json toJson() const override;
     friend ostream& operator<<(ostream& out, const Plane& plane);
 };
 

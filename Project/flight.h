@@ -1,5 +1,3 @@
-#include <utility>
-#include "plane.h"
 #include "runway.h"
 using namespace std;
 
@@ -12,7 +10,7 @@ enum FlightStatus {
 
 FlightStatus stringToEnumFlight(const string&);
 
-class Flight {
+class Flight : public WriteToFile {
 private:
     static int idCnt;
     int id{};

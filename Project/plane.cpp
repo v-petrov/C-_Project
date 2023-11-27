@@ -1,6 +1,10 @@
 #include "plane.h"
 using namespace std;
 
+nlohmann::json WriteToFile::toJson() const {
+    return {};
+}
+
 Class ClassFactory::class_determination(const string &manufacturer) {
     if (manufacturer == "Boeing" || manufacturer == "Airbus" || manufacturer == "Embraer"|| manufacturer == "Airbus Canada") {
         return Class::A;
