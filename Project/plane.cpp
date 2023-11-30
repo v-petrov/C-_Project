@@ -108,8 +108,12 @@ double Plane::getAverageSpeed() const {
 void Plane::printPlane(const string& s, const string& s1) {
     ifstream file("plane.json");
     nlohmann::json jsonPlane;
-    file >> jsonPlane;
-
+    if (file.is_open()) {
+        file >> jsonPlane;
+        file.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
+    }
     for (auto& plane : jsonPlane) {
         if (plane[s] == s1 || to_string(plane[s]) == s1) {
             if (plane.find("firstClass") != plane.end()) {
@@ -127,7 +131,6 @@ void Plane::printPlane(const string& s, const string& s1) {
             }
         }
     }
-    file.close();
 }
 
 void Plane::deserializeCommonData(const nlohmann::json& jsonPlane) {

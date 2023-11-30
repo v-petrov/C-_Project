@@ -160,8 +160,9 @@ void Menu::userMenu() {
     char c;
     do {
         cout << "What do you want to do?\n"
-                "Search for flights for specific destination[D].\n"
-                "Search for planes by airline[A].\n"
+                "Search for a flight for a specific destination[D].\n"
+                "Search for a plane[P].\n"
+                "Search for a runway[R].\n"
                 "If you want to exit the user menu press anything else[...]"<< endl;
         cin >> c;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -176,12 +177,11 @@ void Menu::userMenu() {
                 getline(cin, eDestination);
                 ObjectsManaging::searchByDestination(sDestination, eDestination);
                 break;
-            } case 'A': {
-                cout << "Enter the airline: " << endl;
-                string airline;
-                getline(cin, airline);
-                ObjectsManaging::searchByAirline(airline);
+            } case 'P': {
+                ObjectsManaging::searchForAPlane();
                 break;
+            } case 'R': {
+                ObjectsManaging::searchForARunway();
             } default: {
                 break;
             }

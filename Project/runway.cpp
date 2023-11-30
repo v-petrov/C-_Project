@@ -46,6 +46,6 @@ void from_json(const nlohmann::json& json, Runway& runway) {
 ostream& operator<<(ostream & out, const Runway& runway) {
     out << "Airport name: " << runway.getAirportName() << ", ";
     out << "Runway ID: " << runway.getId() << ", ";
-    out << "Distance: " << runway.getDistance() << ".";
+    out << "Distance: " << runway.getDistance() << ".\n";
     return out;
 }

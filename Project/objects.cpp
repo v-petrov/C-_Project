@@ -303,8 +303,49 @@ bool ObjectsManaging::deletePlane(const string& text, const string& fileName, co
     }
     return true;
 }
-void ObjectsManaging::searchByAirline(const string& airline) {
-    Plane::printPlane("airline", airline);
+void ObjectsManaging::searchForAPlane() {
+    ifstream file("plane.json");
+    nlohmann::json planeData;
+    if (file.is_open()) {
+        file >> planeData;
+        file.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
+    }
+
+    cout << "PLANE INFORMATION:" << endl;
+    for (auto& plane : planeData) {
+        if (plane.find("firstClass") != plane.end()) {
+            PassengerPlane pp;
+            from_json(plane, pp);
+            cout << pp;
+        } else if (plane.find("flightEntertainment") != plane.end()) {
+            BusinessPlane bp;
+            from_json(plane, bp);
+            cout << bp;
+        } else {
+            CargoPlane cp;
+            from_json(plane, cp);
+            cout << cp;
+        }
+    }
+}
+void ObjectsManaging::searchForARunway() {
+    ifstream file("runway.json");
+    nlohmann::json runwayData;
+    if (file.is_open()) {
+        file >> runwayData;
+        file.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
+    }
+
+    cout << "RUNWAY INFORMATION:" << endl;
+    for (auto& runway : runwayData) {
+        Runway r;
+        from_json(runway, r);
+        cout << r;
+    }
 }
 void ObjectsManaging::searchByDestination(const string& sDestination, const string& eDestination) {
     ifstream file("flight.json");
@@ -315,20 +356,13 @@ void ObjectsManaging::searchByDestination(const string& sDestination, const stri
     } else {
         throw ios_base::failure("File couldn't be open");
     }
-    vector<shared_ptr<Flight>> flights;
 
+    cout << "FLIGHT INFORMATION:" << endl;
     for (auto& flight : flightData) {
         if (flight["startingDestination"] == sDestination && flight["endingDestination"] == eDestination) {
-            auto f = make_shared<Flight>();
-            from_json(flight, *f);
-            flights.push_back(f);
+            Flight f;
+            from_json(flight, f);
+            cout << f;
         }
-    }
-    printFlights(flights);
-}
-void ObjectsManaging::printFlights(const vector<shared_ptr<Flight>>& flights) {
-    for (const auto& flight : flights) {
-        cout << "FLIGHT INFORMATION:" << endl;
-        cout << *flight;
     }
 }
