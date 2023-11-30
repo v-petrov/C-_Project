@@ -22,7 +22,7 @@ class Runway : public WriteToFile {
         [[nodiscard]] int getId() const;
         [[nodiscard]] string getAirportName() const;
         [[nodiscard]] int getDistance() const;
-        [[nodiscard]] nlohmann::json toJson() const;
+        [[nodiscard]] nlohmann::json toJson() const override;
         friend void from_json(const nlohmann::json&, Runway&);
         friend ostream& operator<<(ostream&, const Runway&);
 };

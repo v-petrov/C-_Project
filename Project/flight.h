@@ -45,7 +45,7 @@ public:
     [[nodiscard]] int getPlaneId() const;
     static int getIdCnt();
     static void setIdCnt(int id);
-    [[nodiscard]] nlohmann::json toJson() const;
+    [[nodiscard]] nlohmann::json toJson() const override;
     friend void from_json(const nlohmann::json& json, Flight& flight);
     friend ostream& operator<<(ostream& out, Flight flight);
 };
