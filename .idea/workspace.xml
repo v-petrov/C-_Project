@@ -21,9 +21,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2YRXEuPb0zSLwjBkeX2khCDWwy4" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -38,7 +38,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/vasil/OneDrive/Desktop/Cpp",
+    "last_opened_file_path": "C:/Users/vasil/OneDrive/Desktop/Cpp/Project",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -51,6 +51,7 @@
       <option name="presentableId" value="Default" />
       <updated>1700489257568</updated>
       <workItem from="1700489258587" duration="18000" />
+      <workItem from="1701599561589" duration="22000" />
     </task>
     <servers />
   </component>

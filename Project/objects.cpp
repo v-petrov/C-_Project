@@ -232,35 +232,35 @@ bool ObjectsManaging::createFlight() {
     return true;
 }
 bool ObjectsManaging::deleteObject(const string& text, const string& fileName, const string& text1, int& id) {
-    string flightId;
-    if (!Validations::validNumericData(text, flightId)) {
+    string dataId;
+    if (!Validations::validNumericData(text, dataId)) {
         return false;
     }
-    id = stoi(flightId);
+    id = stoi(dataId);
 
     ifstream file(fileName);
-    nlohmann::json flightData;
+    nlohmann::json jsonData;
     if (file.is_open()) {
-        file >> flightData;
+        file >> jsonData;
         file.close();
     } else {
         throw ios_base::failure("File couldn't be open");
     }
-    auto it = find_if(flightData.begin(), flightData.end(), [&flightId](const auto& flight) {
-        return flight["id"] == stoi(flightId);
+    auto it = find_if(jsonData.begin(), jsonData.end(), [&dataId](const auto& data) {
+        return data["id"] == stoi(dataId);
     });
 
-    if (it != flightData.end()) {
+    if (it != jsonData.end()) {
         char p;
         cout << "CONFIRMATION!!!DO YOU WANT TO PROCEED?[Y/N]: " << endl;
         cin >> p;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         p = static_cast<char>(toupper(p));
         if (p == 'Y') {
-            flightData.erase(it);
+            jsonData.erase(it);
             ofstream outputFile(fileName);
             if (outputFile.is_open()) {
-                outputFile << flightData.dump(4) << endl;
+                outputFile << jsonData.dump(4) << endl;
                 outputFile.close();
             } else {
                 throw ios_base::failure("File couldn't be open");
@@ -270,7 +270,7 @@ bool ObjectsManaging::deleteObject(const string& text, const string& fileName, c
             return false;
         }
     } else {
-        cout << text1 << " with ID: " << flightId << ",couldn't be found!" << endl;
+        cout << text1 << " with ID: " << dataId << ",couldn't be found!" << endl;
         return false;
     }
     return true;
