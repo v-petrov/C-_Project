@@ -1,0 +1,194 @@
+@startuml Project
+
+class WriteToFile {
+    +toJson(): nlohmann::json
+}
+
+enum Class {
+    A, B, C
+}
+
+class ClassFactory {
+    +class_determination(const string&): Class
+}
+
+enum PlaneType {
+    PASSENGERS, BUSINESS, CARGO
+}
+
+class PlaneClass {
+    -manufacturer: string
+    -model: string
+    -minRunwayDistance: double
+    -planeClass: Class
+
+    +PlaneClass(manufacturer: const string&, model: string, minRunwayDistance: double)
+    +getManufacturer(): string
+    +getModel(): string
+    +getMinRunwayDistance(): double
+    +getPlaneClass(): Class
+    +toJson(): nlohmann::json
+}
+
+class Plane {
+    -id: int
+    -planeClass: PlaneClass
+    -airline: string
+    -oneKmCost: double
+    -allCost: double
+    -tankVolume: int
+    -averageSpeed: double
+
+    +Plane(planeClass: const PlaneClass&, airline: string, oneKmCost: double, allCost: double, tankVolume: int, averageSpeed: double)
+    +getId(): int
+    +getPlaneClass(): PlaneClass
+    +getAirline(): string
+    +getOneKmCost(): double
+    +getAllCost(): double
+    +getTankVolume(): int
+    +getAverageSpeed(): double
+    +getIdCnt(): int
+    +setIdCnt(id: int): void
+    +printPlane(string&, string&): void
+    +deserializeCommonData(jsonPlane: const nlohmann::json&): void
+    +typeOfPlane(): PlaneType
+    +toJson(): nlohmann::json
+}
+
+class PassengerPlane {
+    -passengerSeats: int
+    -firstClass: bool
+
+    +PassengerPlane(planeClass: const PlaneClass&, airline: const string&, one_km_cost: double, all_cost: double, tank_volume: int, average_speed: double, seats: int, first_class: bool)
+    +getPassengerSeats(): int
+    +getFirstClass(): bool
+    +typeOfPlane(): PlaneType
+    +toJson(): nlohmann::json
+}
+
+class BusinessPlane {
+    -passengerSeats: int
+    -flightEntertainment: bool
+    -privateSuites: bool
+
+    +BusinessPlane(planeClass: const PlaneClass&, airline: const string&, one_km_cost: double, all_cost: double, tank_volume: int, average_speed: double, seats: int, flightEntertainment: bool, privateSuites: bool)
+    +getPassengerSeats(): int
+    +getFlightEntertainment(): bool
+    +getPrivateSuite(): bool
+    +typeOfPlane(): PlaneType
+    +toJson(): nlohmann::json
+}
+
+class CargoPlane {
+    -capacity: double
+    -numberOfCompartments: int
+    -temperatureControl: bool
+
+    +CargoPlane(planeClass: const PlaneClass&, airline: const string&, one_km_cost: double, all_cost: double, tank_volume: int, average_speed: double, capacity: double, numberOfCompartments: int, temperatureControl: bool)
+    +getCapacity(): double
+    +getNumberOfCompartments(): int
+    +getTemperatureControl(): bool
+    +typeOfPlane(): PlaneType
+    +toJson(): nlohmann::json
+}
+
+enum FlightStatus {
+    FINISHED, ONGOING, INCOMING, ERROR
+}
+
+class Flight {
+    -id: int
+    -status: FlightStatus
+    -startingDestination: string
+    -takeoffRunwayId: int
+    -endingDestination: string
+    -landingRunwayId: int
+    -totalDistance: double
+    -date: string
+    -time: string
+    -plainId: int
+
+    +Flight(status: FlightStatus, startingDestination: string, takeoffRunwayId: int, endingDestination: string, landingRunwayId: int, totalDistance: double, date: string, time: string, plainId: int)
+    +getId(): int
+    +getFlightStatus(): FlightStatus
+    +getStartingDestination(): string
+    +getTakeOffRunwayId(): int
+    +getEndingDestination(): string
+    +getLandingRunwayId(): int
+    +getTotalDistance(): double
+    +getDate(): string
+    +getTime(): string
+    +getPlaneId(): int
+    +getIdCnt(): int
+    +setIdCnt(id: int): void
+    +toJson(): nlohmann::json
+}
+
+class Runway {
+    -id: int
+    -airportName: string
+    -distance: int
+
+    +Runway(airportName: string, distance: int)
+    +setIdCnt(id: int): void
+    +getIdCnt(): int
+    +printRunway(int): void
+    +getId(): int
+    +getAirportName(): string
+    +getDistance(): int
+    +toJson(): nlohmann::json
+}
+
+class FilesHandling {
+    -loadIds(): int*
+    +addDataToFile(data: const WriteToFile&, fileName: const string&): void
+    +isUsernameAvailable(username: const string&, password: const string&, isAdmin: bool): bool
+    +saveUser(username: const string&, password: const string&): void
+    +saveIds(ids: const int*): void
+    +setIds(): int*
+}
+
+class ObjectsManaging {
+    +createPlane(): bool
+    +createFlight(): bool
+    +createRunway(): bool
+    +deleteObject(objectType: const string&, objectName: const string&, objectID: const string&, id: int&): bool
+    +deletePlane(manufacturer: const string&, model: const string&, planeClass: const string&): bool
+    +searchByDestination(startingDestination: const string&, endingDestination: const string&): void
+    +searchForAPlane(): void
+    +searchForARunway(): void
+}
+
+class Validations {
+    +validPlaneId(id: int): bool
+    +validRunwayId(id: int, distance: int&): bool
+    +validPlaneMinRunwayDistance(planeMinDistance: int, runwayDistance: int, tankVolume: int): bool
+    +validNumericData(data: const string&, errorMessage: string&): bool
+    +credentialsInformation(username: string&, password: string&, isAdmin: bool): bool
+}
+
+class Menu {
+    -void login(): void
+    -registration(): void
+    -adminMenu(): void
+    -userMenu(): void
+    +welcome(): void
+}
+
+Plane <|-- PassengerPlane
+Plane <|-- BusinessPlane
+Plane <|-- CargoPlane
+
+WriteToFile <|-- Plane
+WriteToFile <|-- Flight
+WriteToFile <|-- Runway
+
+Plane --> PlaneClass
+PlaneClass --> ClassFactory
+PlaneClass --> Class
+Flight --> FlightStatus
+
+PassengerPlane --> PlaneType
+BusinessPlane --> PlaneType
+CargoPlane --> PlaneType
+@enduml
