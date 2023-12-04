@@ -75,6 +75,26 @@ bool Validations::validNumericData(const string& text, string& var) {
     } while (!res);
     return true;
 }
+FlightStatus Validations::validStrFlightStatus() {
+    int cnt1 = 0;
+    FlightStatus newStatus;
+    do {
+        cnt1++;
+        cout << "Enter flight's new status[INCOMING/ONGOING/FINISHED]: " << endl;
+        string strStatus;
+        getline(cin, strStatus);
+        transform(strStatus.begin(), strStatus.end(), strStatus.begin(), ::toupper);
+        newStatus = stringToEnumFlight(strStatus);
+        if (newStatus == FlightStatus::ERROR) {
+            if (cnt1 == 3) {
+                cout << "Your session ended. Too many tries!\n" << endl;
+                return newStatus;
+            }
+            cout << "Please provide a correct status for the flight. Try again." << endl;
+        }
+    } while (newStatus == FlightStatus::ERROR);
+    return newStatus;
+}
 bool Validations::credentialsInformation(string& username, string& password, bool isLogin) {
     cout << "Enter your username: " << endl;
     getline(cin, username);

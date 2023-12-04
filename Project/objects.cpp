@@ -303,6 +303,39 @@ bool ObjectsManaging::deletePlane(const string& text, const string& fileName, co
     }
     return true;
 }
+bool ObjectsManaging::changeFlightStatus(int id) {
+    ifstream inputFile("flight.json");
+    nlohmann::json flightData;
+    if (inputFile.is_open()) {
+        inputFile >> flightData;
+        inputFile.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
+    }
+    bool res = false;
+    for (auto& flight : flightData) {
+        if (flight["id"] == id) {
+            FlightStatus newStatus = Validations::validStrFlightStatus();
+            if (newStatus == FlightStatus::ERROR) {
+                break;
+            }
+            res = true;
+            flight["status"] = newStatus;
+        }
+    }
+    if (!res) {
+        cout << "Flight with that id couldn't be found." << endl;
+        return res;
+    }
+    ofstream outputFile("flight.json");
+    if (outputFile.is_open()) {
+        outputFile << flightData.dump(4) << endl;
+        outputFile.close();
+    } else {
+        throw ios_base::failure("File couldn't be open");
+    }
+    return true;
+}
 void ObjectsManaging::searchForAPlane() {
     ifstream file("plane.json");
     nlohmann::json planeData;

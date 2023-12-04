@@ -92,6 +92,7 @@ void Menu::adminMenu() {
     cout << "Do you want to add a plan to the database[P]: " << endl;
     cout << "Do you want to add a flight to the database[F]: " << endl;
     cout << "Do you want to add a runway to the database[R]: " << endl;
+    cout << "Do you want to update a flight's status[U]: " << endl;
     cout << "Do you want to delete a flight, a plane or a runway from the database[D]: " << endl;
     cout << "If you want to exit the admin menu press anything else[...]" << endl;
     char c;
@@ -153,8 +154,21 @@ void Menu::adminMenu() {
             cin >> c;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             c = static_cast<char>(toupper(c));
+        } else if (c == 'U') {
+            string flightId;
+            if (!Validations::validNumericData("Enter flight's id: ", flightId)) {
+                return;
+            }
+            if (ObjectsManaging::changeFlightStatus(stoi(flightId))) {
+                cout << "Flight's status has been updated successfully. Do you want to update another one[U]: " << endl;
+                cin >> c;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                c = static_cast<char>(toupper(c));
+            } else {
+                return;
+            }
         }
-    } while (c == 'P' || c == 'F' || c == 'D' || c == 'R');
+    } while (c == 'P' || c == 'F' || c == 'D' || c == 'R' || c == 'U');
 }
 void Menu::userMenu() {
     char c;

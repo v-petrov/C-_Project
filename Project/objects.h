@@ -14,6 +14,7 @@ public:
     static bool createRunway();
     static bool deleteObject(const string&, const string&, const string&, int&);
     static bool deletePlane(const string&, const string&, const string&);
+    static bool changeFlightStatus(int);
     static void searchByDestination(const string&,const string&);
     static void searchForAPlane();
     static void searchForARunway();

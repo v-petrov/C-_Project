@@ -9,6 +9,7 @@ public:
     static bool validRunwayId(int, int&);
     static bool validPlaneMinRunwayDistance(int, int, int);
     static bool validNumericData(const string&, string&);
+    static FlightStatus validStrFlightStatus();
     static bool credentialsInformation(string&, string&, bool);
 };
 

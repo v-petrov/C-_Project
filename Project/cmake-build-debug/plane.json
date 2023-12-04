@@ -1,0 +1,19 @@
+[
+    {
+        "airline": "Emirates",
+        "allCost": 10000.0,
+        "averageSpeed": 850.0,
+        "capacity": 4.0,
+        "id": 1,
+        "numberOfCompartments": 4,
+        "oneKmCost": 100.0,
+        "planeClass": {
+            "manufacturer": "Boeing",
+            "minRunwayDistance": 3000.0,
+            "model": "467",
+            "planeClass": 0
+        },
+        "tankVolume": 150,
+        "temperatureControl": true
+    }
+]
