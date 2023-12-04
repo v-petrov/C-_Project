@@ -11,6 +11,7 @@ private:
     static void registration();
     static void adminMenu();
     static void userMenu();
+    static void commonPrompt();
 public:
     static void welcome();
 };
