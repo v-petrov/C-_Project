@@ -154,6 +154,7 @@ class ObjectsManaging {
     +createRunway(): bool
     +deleteObject(objectType: const string&, objectName: const string&, objectID: const string&, id: int&): bool
     +deletePlane(manufacturer: const string&, model: const string&, planeClass: const string&): bool
+    +changeFlightStatus(int): bool
     +searchByDestination(startingDestination: const string&, endingDestination: const string&): void
     +searchForAPlane(): void
     +searchForARunway(): void
@@ -164,6 +165,7 @@ class Validations {
     +validRunwayId(id: int, distance: int&): bool
     +validPlaneMinRunwayDistance(planeMinDistance: int, runwayDistance: int, tankVolume: int): bool
     +validNumericData(data: const string&, errorMessage: string&): bool
+    +validStrFlightStatus(): FlightStatus
     +credentialsInformation(username: string&, password: string&, isAdmin: bool): bool
 }
 
